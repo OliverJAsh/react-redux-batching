@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider, connect, ConnectedProps, batch } from "react-redux";
+import { Provider, connect, ConnectedProps } from "react-redux";
 import { store, increment } from "./store";
 
 const divEl = document.querySelector("div");
