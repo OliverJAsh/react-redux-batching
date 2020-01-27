@@ -13,7 +13,7 @@ const Counter: React.FC<ConnectedProps<typeof connectThis>> = ({
     <div>{count}</div>
     <button
       onClick={() => {
-        setTimeout(() => {
+        fetch("https://httpbin.org/get").then(() => {
           batch(() => {
             dispatch(increment());
             dispatch(increment());
@@ -27,15 +27,18 @@ const Counter: React.FC<ConnectedProps<typeof connectThis>> = ({
 );
 
 const wait = (ms: number) => {
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
+  var start = new Date().getTime();
+  var end = start;
+  while (end < start + ms) {
+    end = new Date().getTime();
   }
-}
+};
 const expensiveSelector = () => wait(3000);
 
-const connectThis = connect(state => ({ count: state, expensiveData: expensiveSelector() }));
+const connectThis = connect(state => ({
+  count: state,
+  expensiveData: expensiveSelector()
+}));
 const CounterEnhanced = connectThis(Counter);
 
 ReactDOM.render(
