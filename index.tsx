@@ -26,7 +26,19 @@ const Counter: React.FC<ConnectedProps<typeof connectThis>> = ({
   </div>
 );
 
-const connectThis = connect(state => ({ count: state }));
+const wait = (ms: number) => {
+  var start = new Date().getTime();
+  var end = start;
+  while (end < start + ms) {
+    end = new Date().getTime();
+  }
+};
+const expensiveSelector = () => wait(3000);
+
+const connectThis = connect(state => ({
+  count: state,
+  expensiveData: expensiveSelector()
+}));
 const CounterEnhanced = connectThis(Counter);
 
 ReactDOM.render(
