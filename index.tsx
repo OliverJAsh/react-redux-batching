@@ -14,8 +14,10 @@ const Counter: React.FC<ConnectedProps<typeof connectThis>> = ({
     <button
       onClick={() => {
         fetch("https://httpbin.org/get").then(() => {
-          dispatch(increment());
-          dispatch(increment());
+          batch(() => {
+            dispatch(increment());
+            dispatch(increment());
+          });
         });
       }}
     >
